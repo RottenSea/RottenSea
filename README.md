@@ -45,14 +45,12 @@ Here are some ideas to get you started:
     <a href="#"><img alt="Visual Studio Code" src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7?logo=visual-studio-code&logoColor=white"></a>
     <a href="#"><img alt="GitHub Desktop" src="https://img.shields.io/badge/GitHub%20Desktop-8034A9?logo=github&logoColor=white"></a>
     <a href="#"><img alt="Git" src="https://img.shields.io/badge/Git-F05033?logo=git&logoColor=white"></a>
-    <a href="#"><img alt="Android" src="https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white"></a>
-    <a href="#"><img alt="Android Studio" src="https://img.shields.io/badge/Android%20Studio-008678?logo=android-studio&logoColor=white"></a>
 </div>
 
 <h3 align="center">🎮 When I'm AFK</h3>
 
 <div align="center">
-    <a href="#"><img alt="Android Studio" src="https://img.shields.io/badge/steam-000000?style=for-the-badge&logo=steam&logoColor=white"></a>
+    <a href="#"><img alt="Steam" src="https://img.shields.io/badge/steam-000000?style=for-the-badge&logo=steam&logoColor=white"></a>
 </div>
 
 
