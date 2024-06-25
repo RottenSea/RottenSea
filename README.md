@@ -1,7 +1,5 @@
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&show_icons=true&theme=dark)
-
-
-
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact)
 
 
 
