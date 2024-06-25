@@ -1,4 +1,4 @@
-(https://github-readme-stats.vercel.app/api?username=RottenSea&show_icons=true&count_private=false)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&show_icons=true&count_private=false)
 
 
 
