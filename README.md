@@ -13,6 +13,11 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
+<div align="center">
+    <img href="#" alt="![Anurag's GitHub stats]" src="https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true" /><br>
+    <img href="#" alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact" />
+</div>
+
 <h3 align="center">🌱 I’m currently learning ...</h3>
 
 <div align="center">
@@ -50,10 +55,6 @@ Here are some ideas to get you started:
     <a href="#"><img alt="Android Studio" src="https://img.shields.io/badge/steam-000000?style=for-the-badge&logo=steam&logoColor=white"></a>
 </div>
 
-<div align="center">
-    <img href="#" alt="![Anurag's GitHub stats]" src="https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true" /><br>
-    <img href="#" alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact" />
-</div>
 
 
 
