@@ -1,7 +1,3 @@
-
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true)  
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact)
-
 <h3 align="center">🌱 I’m currently learning ...</h3>
 
 <div align="center">
@@ -37,7 +33,10 @@
 
 
 
-
+<div align="center">
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true)<br>
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact)
+</div>
 
 
 
