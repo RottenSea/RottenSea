@@ -50,7 +50,7 @@ Here are some ideas to get you started:
 <h3 align="center">📬 Contact Me</h3>
 
 <div align="center">
-    <a href="#"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
+    <a href="#" title="rotten_th"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
     <a href="https://qm.qq.com/q/ypNm6u4Rd8"><img alt="QQ" src="https://img.shields.io/badge/QQ-1EBAFC?style=for-the-badge&logo=Tencent%20QQ&logoColor=white"></a>
 </div>
 
