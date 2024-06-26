@@ -18,6 +18,8 @@ Here are some ideas to get you started:
     <img href="#" alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact" />
 </div>
 
+<a href="#" onclick="alert('Hello, this is a prompt!'); return false;"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
+
 <h3 align="center">📖 I’m currently learning ...</h3>
 
 <div align="center">
