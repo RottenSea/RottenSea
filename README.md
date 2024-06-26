@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 
 <div align="center">
     <img href="#" alt="![Anurag's GitHub stats]" src="https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true" /><br>
-    <img href="#" alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark" />
+    <img href="#" alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact" />
 </div>
 
 <h3 align="center">📖 I’m currently learning ...</h3>
@@ -51,6 +51,7 @@ Here are some ideas to get you started:
 
 <div align="center">
     <a href="#"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
+    <a href="https://qm.qq.com/q/ypNm6u4Rd8"><img alt="QQ" src="https://img.shields.io/badge/QQ-1EBAFC?style=for-the-badge&logo=Tencent%20QQ&logoColor=white"></a>
 </div>
 
 
