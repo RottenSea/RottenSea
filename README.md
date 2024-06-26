@@ -15,10 +15,10 @@ Here are some ideas to get you started:
 
 <div align="center">
     <img href="#" alt="![Anurag's GitHub stats]" src="https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true" /><br>
-    <img href="#" alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact" />
+    <img href="#" alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark" />
 </div>
 
-<h3 align="center">🌱 I’m currently learning ...</h3>
+<h3 align="center">📖 I’m currently learning ...</h3>
 
 <div align="center">
     <a href="#"><img alt="C++" src="https://custom-icon-badges.demolab.com/badge/C++-9C033A?logo=cpp2&logoColor=white"></a>
@@ -33,7 +33,7 @@ Here are some ideas to get you started:
     <a href="#"><img alt="C" src="https://custom-icon-badges.demolab.com/badge/C-03599C?logo=c-in-hexagon&logoColor=white"></a>
 </div>
 
-<h3 align="center">🗄️ Databases and Cloud Hosting</h3>
+<h3 align="center">📁 Databases and Cloud Hosting</h3>
 
 <div align="center">
     <a href="#"><img alt="GitHub Pages" src="https://img.shields.io/badge/GitHub%20Pages-327FC7?logo=github&logoColor=white"></a>
@@ -47,10 +47,10 @@ Here are some ideas to get you started:
     <a href="#"><img alt="Git" src="https://img.shields.io/badge/Git-F05033?logo=git&logoColor=white"></a>
 </div>
 
-<h3 align="center">🎮 When I'm AFK</h3>
+<h3 align="center">📬 Contact Me</h3>
 
 <div align="center">
-    <a href="#"><img alt="Steam" src="https://img.shields.io/badge/steam-000000?style=for-the-badge&logo=steam&logoColor=white"></a>
+    <a href="#"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
 </div>
 
 
