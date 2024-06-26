@@ -14,7 +14,7 @@ Here are some ideas to get you started:
 -->
 
 <div align="center">
-    <a href="#"><img alt="![Anurag's GitHub stats]" src="https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true"></a>
+    <a href="#"><img alt="![Anurag's GitHub stats]" src="https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true"></a><br>
     <a href="#"><img alt="![Top Langs]" src="https://github-readme-stats.vercel.app/api/top-langs/?username=RottenSea&theme=dark&layout=compact"></a>
 </div>
 
