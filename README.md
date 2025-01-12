@@ -15,7 +15,7 @@ Here are some ideas to get you started:
 
 <div align="center">
   
-[![RottenSea's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+![RottenSea's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true)
 
 ![Static Badge](https://img.shields.io/badge/C-03599C?logo=c&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/C%2B%2B-9C033A?logo=cplusplus&logoColor=white)
