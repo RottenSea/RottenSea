@@ -25,29 +25,3 @@ Here are some ideas to get you started:
     <a href="#"><img alt="HTML" src="https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white"></a>
     <a href="#"><img alt="CSS" src="https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white"></a>
 </div>
-
-
-
-
-
-<h3 align="center">💻 Software and Tools</h3>
-
-<div align="center">
-    <a href="#"><img alt="Visual Studio Code" src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7?logo=visual-studio-code&logoColor=white"></a>
-    <a href="#"><img alt="GitHub Desktop" src="https://img.shields.io/badge/GitHub%20Desktop-8034A9?logo=github&logoColor=white"></a>
-    <a href="#"><img alt="Git" src="https://img.shields.io/badge/Git-F05033?logo=git&logoColor=white"></a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
