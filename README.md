@@ -14,6 +14,7 @@ Here are some ideas to get you started:
 -->
 
 <div align="center">
+  
 [![RottenSea's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
 
 ![Static Badge](https://img.shields.io/badge/C-03599C?logo=c&logoColor=white)
@@ -24,6 +25,7 @@ Here are some ideas to get you started:
 ![Static Badge](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/Node.js-5FA04E?logo=nodedotjs&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/Electron-47848F?logo=electron&logoColor=white)
+
 </div>
 
 
