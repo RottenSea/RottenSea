@@ -14,8 +14,8 @@ Here are some ideas to get you started:
 -->
 
 <div align="center">
-    <a href="#"><img alt="![Anurag's GitHub stats]" src="https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true"></a>
-    
+[![RottenSea's GitHub stats](https://github-readme-stats.vercel.app/api?username=RottenSea&theme=dark&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
+
 ![Static Badge](https://img.shields.io/badge/C-03599C?logo=c&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/C%2B%2B-9C033A?logo=cplusplus&logoColor=white)
 ![Static Badge](https://img.shields.io/badge/HTML-E34F26?logo=html5&logoColor=white)
