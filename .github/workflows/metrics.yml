@@ -25,16 +25,11 @@ jobs:
           committer_branch: cache
           committer_message: "chore: update metrics"
 
-          base: header, activity, community, repositories, metadata
+          base: header, activity, community
 
           template: classic
           user: RottenSea
           repositories_skipped: RottenSea.github.io, RottenSea
-
-          plugin_lines: yes
-          plugin_lines_history_limit: 3
-          plugin_lines_repositories_limit: 10
-          plugin_lines_sections: base
 
       - name: full-year calendar
         uses: lowlighter/metrics@latest

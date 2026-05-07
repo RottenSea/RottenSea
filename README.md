@@ -1,7 +1,7 @@
 <div align="center">
   <table>
     <tr>
-      <td rowspan="2">
+      <td>
         <img
           src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/classic.svg"
           alt="classic"
@@ -15,7 +15,7 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <img
           src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/languages.svg"
           alt="languages"
