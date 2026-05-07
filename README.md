@@ -1,4 +1,33 @@
+<div align="center">
+  <table>
+    <tr>
+      <td rowspan="2">
+        <img
+          src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/classic.svg"
+          alt="classic"
+        />
+      </td>
+      <td>
+        <img
+          src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/isocalendar.svg"
+          alt="isocalendar"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img
+          src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/languages.svg"
+          alt="languages"
+        />
+      </td>
+    </tr>
+  </table>
+</div>
+
+<!--
 ## Hi there 👋
+-->
 
 <!--
 **RottenSea/RottenSea** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
