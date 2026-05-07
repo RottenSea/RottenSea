@@ -1,5 +1,5 @@
 <div align="center">
-  <table>
+  <table style="text-align: center;">
     <tr>
       <td>
         <img
