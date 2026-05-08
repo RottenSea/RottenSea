@@ -1,5 +1,5 @@
 <div align="center">
-  <table style="text-align: center;">
+  <table>
     <tr>
       <td>
         <img
@@ -15,7 +15,7 @@
       </td>
     </tr>
     <tr>
-      <td colspan="2">
+      <td colspan="2" align="center">
         <img
           src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/languages.svg"
           alt="languages"
