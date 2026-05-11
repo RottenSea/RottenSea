@@ -21,14 +21,14 @@
                         <rect x="0" y="0" width="460" height="8" fill="white" rx="5"/>
                     </mask>
                     <rect mask="url(#languages-bar)" x="0" y="0" width="0" height="8" fill="#d1d5da"/>
-                    <rect mask="url(#languages-bar)" x="0" y="0" width="379.36115142357005" height="8" fill="#f34b7d"/>
-                    <rect mask="url(#languages-bar)" x="379.36115142357005" y="0" width="33.23648368966222" height="8" fill="#3572A5"/>
-                    <rect mask="url(#languages-bar)" x="412.5976351132323" y="0" width="15.372561927417626" height="8" fill="#3178c6"/>
-                    <rect mask="url(#languages-bar)" x="427.9701970406499" y="0" width="14.617812953515164" height="8" fill="#663399"/>
-                    <rect mask="url(#languages-bar)" x="442.588009994165" y="0" width="12.745851972650698" height="8" fill="#ff5a03"/>
-                    <rect mask="url(#languages-bar)" x="455.33386196681573" y="0" width="2.505124253803917" height="8" fill="#427819"/>
-                    <rect mask="url(#languages-bar)" x="457.83898622061963" y="0" width="1.2089748001416338" height="8" fill="#f1e05a"/>
-                    <rect mask="url(#languages-bar)" x="459.04796102076125" y="0" width="0.952038979238668" height="8" fill="#012456"/>
+                    <rect mask="url(#languages-bar)" x="0" y="0" width="372.9919927822262" height="8" fill="#f34b7d"/>
+                    <rect mask="url(#languages-bar)" x="372.9919927822262" y="0" width="32.67847073418292" height="8" fill="#3572A5"/>
+                    <rect mask="url(#languages-bar)" x="405.67046351640914" y="0" width="17.945190030449982" height="8" fill="#ff5a03"/>
+                    <rect mask="url(#languages-bar)" x="423.6156535468591" y="0" width="16.197135446035865" height="8" fill="#663399"/>
+                    <rect mask="url(#languages-bar)" x="439.812788992895" y="0" width="15.114469380850343" height="8" fill="#3178c6"/>
+                    <rect mask="url(#languages-bar)" x="454.9272583737453" y="0" width="2.4630652982970567" height="8" fill="#427819"/>
+                    <rect mask="url(#languages-bar)" x="457.3903236720423" y="0" width="1.6736212924326153" height="8" fill="#f1e05a"/>
+                    <rect mask="url(#languages-bar)" x="459.06394496447496" y="0" width="0.9360550355249803" height="8" fill="#012456"/>
                 </svg>
                 <div class="row fill-width">
                     <section>
@@ -41,7 +41,19 @@
                             </div>
                             <small>
                                 <div>165 kB</div>
-                                <div>82.47%</div>
+                                <div>81.09%</div>
+                            </small>
+                        </div>
+                        <div class="field language details">
+                            <div class="field">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                    <path fill="#ff5a03" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
+                                </svg>
+                                Astro
+                            </div>
+                            <small>
+                                <div>7.96 kB</div>
+                                <div>3.9%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -53,19 +65,7 @@
                             </div>
                             <small>
                                 <div>6.70 kB</div>
-                                <div>3.34%</div>
-                            </small>
-                        </div>
-                        <div class="field language details">
-                            <div class="field">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                    <path fill="#ff5a03" fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8z"/>
-                                </svg>
-                                Astro
-                            </div>
-                            <small>
-                                <div>5.56 kB</div>
-                                <div>2.77%</div>
+                                <div>3.29%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -76,8 +76,8 @@
                                 JavaScript
                             </div>
                             <small>
-                                <div>527 bytes</div>
-                                <div>0.26%</div>
+                                <div>742 bytes</div>
+                                <div>0.36%</div>
                             </small>
                         </div>
                     </section>
@@ -91,7 +91,7 @@
                             </div>
                             <small>
                                 <div>14.4 kB</div>
-                                <div>7.23%</div>
+                                <div>7.1%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -102,8 +102,8 @@
                                 CSS
                             </div>
                             <small>
-                                <div>6.37 kB</div>
-                                <div>3.18%</div>
+                                <div>7.18 kB</div>
+                                <div>3.52%</div>
                             </small>
                         </div>
                         <div class="field language details">
@@ -127,7 +127,7 @@
                             </div>
                             <small>
                                 <div>415 bytes</div>
-                                <div>0.21%</div>
+                                <div>0.2%</div>
                             </small>
                         </div>
                     </section>
