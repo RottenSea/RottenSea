@@ -3,16 +3,13 @@
     <tr>
       <td valign="top">
         <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/classic.svg" alt="GitHub metrics" />
-      </td>
-      <td valign="top">
-        <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/stars.svg" alt="Recently starred repositories" />
         <br />
         <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/languages.svg" alt="Most used languages" />
       </td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center">
-        <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/isocalendar.svg" alt="Contributions calendar" width="100%" />
+      <td valign="top">
+        <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/stars.svg" alt="Recently starred repositories" />
+        <hr />
+        <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/isocalendar.svg" alt="Contributions calendar" />
       </td>
     </tr>
   </table>

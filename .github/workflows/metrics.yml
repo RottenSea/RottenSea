@@ -1,6 +1,6 @@
 # The profile README's images, one per block, committed to the cache branch every day. The README
-# lays them out in a table: the Classic image on the left, recently starred and languages on the
-# right, and the isometric calendar across the bottom.
+# lays them out in a table: the Classic image and languages on the left; recently starred, a
+# divider and the isometric calendar on the right.
 name: Metrics
 
 on:
@@ -43,7 +43,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_stars: yes
-          plugin_stars_limit: 4
+          plugin_stars_limit: 3
 
       - name: Languages
         uses: gh-metrics/metrics@master
