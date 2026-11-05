@@ -1,28 +1,8 @@
 <div align="center">
-  <table>
-    <tr>
-      <td>
-        <img
-          src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/classic.svg"
-          alt="classic"
-        />
-      </td>
-      <td>
-        <img
-          src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/isocalendar.svg"
-          alt="isocalendar"
-        />
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center">
-        <img
-          src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/languages.svg"
-          alt="languages"
-        />
-      </td>
-    </tr>
-  </table>
+  <img
+    src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/profile.svg"
+    alt="GitHub metrics"
+  />
 </div>
 
 <!--
