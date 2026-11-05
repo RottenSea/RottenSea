@@ -29,7 +29,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: header, activity, community, repositories
           plugin_lines: yes
-          plugin_lines_sections: base, repositories, history
+          plugin_lines_sections: base, repositories
 
       - name: Recently starred
         uses: gh-metrics/metrics@master
