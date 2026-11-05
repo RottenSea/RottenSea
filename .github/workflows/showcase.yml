@@ -1,7 +1,10 @@
-# Generates dark versions of five profile stats tools, with most of their options, so the ones
+# Generates gh-metrics images, dark-friendly, with most plugins and their options, so the ones
 # worth keeping can be picked for the profile README. Run it by hand: it rebuilds the `showcase`
-# branch from nothing, one folder and one page per tool. Every image step may fail on its own
-# without stopping the others; a missing image shows up as a broken one on the page.
+# branch from nothing. Every image step may fail on its own without stopping the others; a missing
+# image shows up as a broken one on the page.
+#
+# gh-metrics renders one image per run in Docker, so the images are split over three jobs that run
+# side by side. The steps are generated; see the showcase notes before editing them by hand.
 name: Showcase
 
 on:
@@ -11,469 +14,48 @@ permissions:
   contents: write
 
 jobs:
-  tools:
+  metrics-1:
     runs-on: ubuntu-latest
-    # The METRICS token lives in this environment. It can read private repositories, so the
-    # stats include them where a tool supports it.
+    # The METRICS token lives in this environment.
     environment:
       name: production
     steps:
-      - uses: actions/checkout@v7
-
-      # ---------------------------------------------------------------------------------------
-      # cicirello/user-statistician: every dark theme, each section alone, and the other options
-      # ---------------------------------------------------------------------------------------
-      - name: user-statistician / theme dark
-        uses: cicirello/user-statistician@v1
+      - name: "Classic, every plugin with data"
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
-          image-file: out/user-statistician/theme-dark.svg
-          colors: dark
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / theme dark-dimmed
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/theme-dark-dimmed.svg
-          colors: dark-dimmed
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / theme dark-high-contrast
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/theme-dark-high-contrast.svg
-          colors: dark-high-contrast
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / theme dark-colorblind
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/theme-dark-colorblind.svg
-          colors: dark-colorblind
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / theme dark-tritanopia
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/theme-dark-tritanopia.svg
-          colors: dark-tritanopia
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / theme halloween
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/theme-halloween.svg
-          colors: halloween
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / section general
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/section-general.svg
-          colors: dark
-          hide-keys: contributions, repositories, languages
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / section contributions
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/section-contributions.svg
-          colors: dark
-          hide-keys: general, repositories, languages
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / section repositories
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/section-repositories.svg
-          colors: dark
-          hide-keys: general, contributions, languages
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / section languages
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/section-languages.svg
-          colors: dark
-          hide-keys: general, contributions, repositories
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / animated language chart, every language
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/animated-languages.svg
-          colors: dark
-          animated-language-chart: true
-          max-languages: 100
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / no title, no border
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/no-title-no-border.svg
-          colors: dark
-          include-title: false
-          show-border: false
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / custom small title, featured repository
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/featured-small-title.svg
-          colors: dark
-          custom-title: GitHub Stats
-          small-title: true
-          featured-repository: design-system
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-      - name: user-statistician / Simplified Chinese
-        uses: cicirello/user-statistician@v1
-        continue-on-error: true
-        with:
-          image-file: out/user-statistician/locale-zh-hans.svg
-          colors: dark
-          locale: zh-Hans
-          commit-and-push: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-
-      # ---------------------------------------------------------------------------------------
-      # jstrieb/github-stats: its two images, with and without private repositories. It has no
-      # Action; the release binary runs on its own.
-      # ---------------------------------------------------------------------------------------
-      - name: github-stats / download
-        continue-on-error: true
-        run: |
-          curl --fail --location --output github-stats \
-            https://github.com/jstrieb/github-stats/releases/latest/download/github-stats_x86_64-linux
-          chmod +x github-stats
-          mkdir -p out/github-stats
-      - name: github-stats / with private repositories
-        continue-on-error: true
-        run: |
-          ./github-stats --silent \
-            --overview-output-file out/github-stats/overview.svg \
-            --languages-output-file out/github-stats/languages.svg
-        env:
-          ACCESS_TOKEN: ${{ secrets.METRICS }}
-          MAX_RETRIES: 10
-      - name: github-stats / public repositories only
-        continue-on-error: true
-        run: |
-          ./github-stats --silent --exclude-private \
-            --overview-output-file out/github-stats/overview-public.svg \
-            --languages-output-file out/github-stats/languages-public.svg
-        env:
-          ACCESS_TOKEN: ${{ secrets.METRICS }}
-          MAX_RETRIES: 10
-
-      # ---------------------------------------------------------------------------------------
-      # stats-organization/github-stats-extended, through its Action: the stats card's options,
-      # every top-languages layout, repository pins, and the stats card in dark themes
-      # ---------------------------------------------------------------------------------------
-      - name: github-stats-extended / stats
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=dark_github&show_icons=true
-          path: out/github-stats-extended/stats.svg
           token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / stats, every extra stat
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=dark_github&show_icons=true&include_all_commits=true&contribs_include_own_repos=true&show=contributions,all_time_contribs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage,prs_authored,prs_commented,prs_reviewed,issues_authored,issues_commented
-          path: out/github-stats-extended/stats-all.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / stats, GitHub rank icon
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=dark_github&show_icons=true&rank_icon=github
-          path: out/github-stats-extended/stats-rank-github.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / stats, percentile rank
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=dark_github&show_icons=true&rank_icon=percentile
-          path: out/github-stats-extended/stats-rank-percentile.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / stats, no rank
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=dark_github&show_icons=true&hide_rank=true
-          path: out/github-stats-extended/stats-no-rank.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / top languages, normal
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: top-langs
-          options: username=RottenSea&theme=dark_github&layout=normal&langs_count=8
-          path: out/github-stats-extended/langs-normal.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / top languages, normal in bytes
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: top-langs
-          options: username=RottenSea&theme=dark_github&layout=normal&langs_count=8&stats_format=bytes
-          path: out/github-stats-extended/langs-normal-bytes.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / top languages, compact
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: top-langs
-          options: username=RottenSea&theme=dark_github&layout=compact&langs_count=8
-          path: out/github-stats-extended/langs-compact.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / top languages, compact without bars
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: top-langs
-          options: username=RottenSea&theme=dark_github&hide_progress=true&langs_count=8
-          path: out/github-stats-extended/langs-no-progress.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / top languages, donut
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: top-langs
-          options: username=RottenSea&theme=dark_github&layout=donut&langs_count=8
-          path: out/github-stats-extended/langs-donut.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / top languages, vertical donut
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: top-langs
-          options: username=RottenSea&theme=dark_github&layout=donut-vertical&langs_count=8
-          path: out/github-stats-extended/langs-donut-vertical.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / top languages, pie
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: top-langs
-          options: username=RottenSea&theme=dark_github&layout=pie&langs_count=8
-          path: out/github-stats-extended/langs-pie.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / pin design-system
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: pin
-          options: username=RottenSea&repo=design-system&theme=dark_github
-          path: out/github-stats-extended/pin-design-system.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / pin RottenSea.github.io
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: pin
-          options: username=RottenSea&repo=RottenSea.github.io&theme=dark_github&show_owner=true
-          path: out/github-stats-extended/pin-rottensea-github-io.svg
-          token: ${{ secrets.METRICS }}
-      # The stats card in fifteen dark themes.
-      - name: github-stats-extended / theme dark
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=dark&show_icons=true
-          path: out/github-stats-extended/theme-dark.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme github_dark
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=github_dark&show_icons=true
-          path: out/github-stats-extended/theme-github_dark.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme github_dark_dimmed
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=github_dark_dimmed&show_icons=true
-          path: out/github-stats-extended/theme-github_dark_dimmed.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme tokyonight
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=tokyonight&show_icons=true
-          path: out/github-stats-extended/theme-tokyonight.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme dracula
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=dracula&show_icons=true
-          path: out/github-stats-extended/theme-dracula.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme radical
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=radical&show_icons=true
-          path: out/github-stats-extended/theme-radical.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme onedark
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=onedark&show_icons=true
-          path: out/github-stats-extended/theme-onedark.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme one_dark_pro
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=one_dark_pro&show_icons=true
-          path: out/github-stats-extended/theme-one_dark_pro.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme catppuccin_mocha
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=catppuccin_mocha&show_icons=true
-          path: out/github-stats-extended/theme-catppuccin_mocha.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme nord
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=nord&show_icons=true
-          path: out/github-stats-extended/theme-nord.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme gruvbox
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=gruvbox&show_icons=true
-          path: out/github-stats-extended/theme-gruvbox.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme rose_pine
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=rose_pine&show_icons=true
-          path: out/github-stats-extended/theme-rose_pine.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme nightowl
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=nightowl&show_icons=true
-          path: out/github-stats-extended/theme-nightowl.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme synthwave
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=synthwave&show_icons=true
-          path: out/github-stats-extended/theme-synthwave.svg
-          token: ${{ secrets.METRICS }}
-      - name: github-stats-extended / theme cobalt
-        uses: stats-organization/github-readme-stats-action@v2
-        continue-on-error: true
-        with:
-          card: stats
-          options: username=RottenSea&theme=cobalt&show_icons=true
-          path: out/github-stats-extended/theme-cobalt.svg
-          token: ${{ secrets.METRICS }}
-
-      # ---------------------------------------------------------------------------------------
-      # yoshi389111/github-profile-3d-contrib: its three night images, then dark versions of the
-      # others from .github/showcase/3d-contrib.json. It always writes to ./profile-3d-contrib/.
-      # ---------------------------------------------------------------------------------------
-      - name: 3d-contrib / built-in images
-        uses: yoshi389111/github-profile-3d-contrib@latest
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-          USERNAME: RottenSea
-      - name: 3d-contrib / keep the night images
-        continue-on-error: true
-        run: |
-          mkdir -p out/3d-contrib
-          for name in night-view night-green night-rainbow; do
-            mv "profile-3d-contrib/profile-$name.svg" out/3d-contrib/
-          done
-          rm -rf profile-3d-contrib
-      - name: 3d-contrib / dark versions of the other styles
-        uses: yoshi389111/github-profile-3d-contrib@latest
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.METRICS }}
-          USERNAME: RottenSea
-          SETTING_JSON: .github/showcase/3d-contrib.json
-      - name: 3d-contrib / collect
-        continue-on-error: true
-        run: |
-          mv profile-3d-contrib/*.svg out/3d-contrib/
-          rm -rf profile-3d-contrib
-
-      - uses: actions/upload-artifact@v7
-        with:
-          name: tools
-          path: out/
-
-  # gh-metrics renders one image per run in Docker, so its forty images take a while; they run
-  # here, next to the other tools.
-  metrics:
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-    steps:
-      - name: gh-metrics / Classic template, default sections
+          user: RottenSea
+          filename: gh-metrics/classic-all.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: "header, activity, community, repositories, metadata"
+          plugin_isocalendar: "yes"
+          plugin_isocalendar_duration: full-year
+          plugin_languages: "yes"
+          plugin_languages_limit: "8"
+          plugin_languages_details: "bytes-size, percentage"
+          plugin_lines: "yes"
+          plugin_achievements: "yes"
+          plugin_achievements_display: compact
+          plugin_activity: "yes"
+          plugin_activity_limit: "5"
+          plugin_activity_days: "0"
+          plugin_habits: "yes"
+          plugin_habits_facts: "yes"
+          plugin_habits_charts: "yes"
+          plugin_followup: "yes"
+          plugin_followup_sections: "repositories, user"
+          plugin_reactions: "yes"
+          plugin_reactions_details: percentage
+          plugin_repositories: "yes"
+          plugin_repositories_pinned: "6"
+          plugin_introduction: "yes"
+          plugin_people: "yes"
+          plugin_stars: "yes"
+          plugin_stars_limit: "4"
+          plugin_stargazers: "yes"
+      - name: "Classic, default sections"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -483,7 +65,29 @@ jobs:
           output_action: none
           config_timezone: Asia/Shanghai
           base: "header, activity, community, repositories, metadata"
-      - name: gh-metrics / Classic template, header only
+      - name: "Classic, default sections, large display"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/classic-large.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: "header, activity, community, repositories, metadata"
+          config_display: large
+      - name: "Classic, default sections, in-depth commit analysis"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/classic-indepth.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: "header, activity, community, repositories, metadata"
+          base_indepth: "yes"
+      - name: "Base section: header"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -493,7 +97,37 @@ jobs:
           output_action: none
           config_timezone: Asia/Shanghai
           base: header
-      - name: gh-metrics / Terminal template
+      - name: "Base section: activity"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/classic-activity.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: activity
+      - name: "Base section: community"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/classic-community.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: community
+      - name: "Base section: repositories"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/classic-repositories.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: repositories
+      - name: "Terminal template"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -504,7 +138,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: "header, activity, community, repositories, metadata"
           template: terminal
-      - name: gh-metrics / Repository template, design-system
+      - name: "Repository template, design-system"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -516,7 +150,178 @@ jobs:
           base: "header, activity, community, repositories, metadata"
           template: repository
           repo: design-system
-      - name: gh-metrics / Isometric calendar, half year
+      - name: "Repositories, pinned"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/repositories-pinned.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_repositories: "yes"
+          plugin_repositories_pinned: "6"
+      - name: "Repositories, featured"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/repositories-featured.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_repositories: "yes"
+          plugin_repositories_featured: "design-system, RottenSea.github.io"
+      - name: "Repositories, most starred"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/repositories-starred.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_repositories: "yes"
+          plugin_repositories_starred: "4"
+      - name: "Introduction"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/introduction.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: header
+          plugin_introduction: "yes"
+      - name: "Introduction, without its title"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/introduction-no-title.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: header
+          plugin_introduction: "yes"
+          plugin_introduction_title: "no"
+      - name: "Followers and following"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/people.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_people: "yes"
+      - name: "Followers and following, identicons, larger"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/people-identicons.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_people: "yes"
+          plugin_people_identicons: "yes"
+          plugin_people_size: "40"
+      - name: "Recently starred"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/stars.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_stars: "yes"
+          plugin_stars_limit: "4"
+      - name: "Stargazers, classic charts"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/stargazers.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_stargazers: "yes"
+      - name: "Stargazers, graph charts"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/stargazers-graph.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_stargazers: "yes"
+          plugin_stargazers_charts_type: graph
+      # The action leaves its images in /metrics_renders/, owned by root.
+      - name: Collect
+        run: |
+          mkdir -p out
+          sudo cp -r /metrics_renders/gh-metrics out/
+          sudo chown -R "$(id -u):$(id -g)" out
+      - uses: actions/upload-artifact@v7
+        with:
+          name: metrics-1
+          path: out/
+
+  metrics-2:
+    runs-on: ubuntu-latest
+    # The METRICS token lives in this environment.
+    environment:
+      name: production
+    steps:
+      - name: "Classic, every plugin with data, large display"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/classic-all-large.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: "header, activity, community, repositories, metadata"
+          plugin_isocalendar: "yes"
+          plugin_isocalendar_duration: full-year
+          plugin_languages: "yes"
+          plugin_languages_limit: "8"
+          plugin_languages_details: "bytes-size, percentage"
+          plugin_lines: "yes"
+          plugin_achievements: "yes"
+          plugin_achievements_display: compact
+          plugin_activity: "yes"
+          plugin_activity_limit: "5"
+          plugin_activity_days: "0"
+          plugin_habits: "yes"
+          plugin_habits_facts: "yes"
+          plugin_habits_charts: "yes"
+          plugin_followup: "yes"
+          plugin_followup_sections: "repositories, user"
+          plugin_reactions: "yes"
+          plugin_reactions_details: percentage
+          plugin_repositories: "yes"
+          plugin_repositories_pinned: "6"
+          plugin_introduction: "yes"
+          plugin_people: "yes"
+          plugin_stars: "yes"
+          plugin_stars_limit: "4"
+          plugin_stargazers: "yes"
+          config_display: large
+      - name: "Isometric calendar, half year"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -527,7 +332,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_isocalendar: "yes"
-      - name: gh-metrics / Isometric calendar, full year
+      - name: "Isometric calendar, full year"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -539,7 +344,7 @@ jobs:
           base: ""
           plugin_isocalendar: "yes"
           plugin_isocalendar_duration: full-year
-      - name: gh-metrics / Calendar, current year
+      - name: "Calendar, current year"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -550,7 +355,19 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_calendar: "yes"
-      - name: gh-metrics / Calendar, full history
+      - name: "Calendar, two years"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/calendar-two-years.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_calendar: "yes"
+          plugin_calendar_limit: "2"
+      - name: "Calendar, full history"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -562,7 +379,7 @@ jobs:
           base: ""
           plugin_calendar: "yes"
           plugin_calendar_limit: "0"
-      - name: gh-metrics / Languages, most used
+      - name: "Languages, most used"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -574,7 +391,7 @@ jobs:
           base: ""
           plugin_languages: "yes"
           plugin_languages_limit: "8"
-      - name: gh-metrics / Languages, with details
+      - name: "Languages, with size and percentage"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -587,7 +404,35 @@ jobs:
           plugin_languages: "yes"
           plugin_languages_limit: "8"
           plugin_languages_details: "bytes-size, percentage"
-      - name: gh-metrics / Languages, recently used
+      - name: "Languages, top four and the rest as other"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/languages-other.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_languages: "yes"
+          plugin_languages_limit: "4"
+          plugin_languages_other: "yes"
+          plugin_languages_details: percentage
+      - name: "Languages, every category including data and prose"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/languages-all-categories.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_languages: "yes"
+          plugin_languages_limit: "8"
+          plugin_languages_categories: "data, markup, programming, prose"
+          plugin_languages_details: percentage
+      - name: "Languages, recently used"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -601,7 +446,7 @@ jobs:
           plugin_languages_limit: "8"
           plugin_languages_sections: recently-used
           plugin_languages_details: "bytes-size, percentage"
-      - name: gh-metrics / Languages, most and recently used
+      - name: "Languages, most and recently used"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -615,7 +460,7 @@ jobs:
           plugin_languages_limit: "8"
           plugin_languages_sections: "most-used, recently-used"
           plugin_languages_details: percentage
-      - name: gh-metrics / Languages, in-depth analysis
+      - name: "Languages, in-depth analysis with lines"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -630,7 +475,7 @@ jobs:
           plugin_languages_indepth: "yes"
           plugin_languages_details: "lines, bytes-size"
           plugin_languages_analysis_timeout: "15"
-      - name: gh-metrics / Lines of code, compact in the base section
+      - name: "Lines of code, in the base section"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -641,7 +486,19 @@ jobs:
           config_timezone: Asia/Shanghai
           base: repositories
           plugin_lines: "yes"
-      - name: gh-metrics / Lines of code, repositories and history
+      - name: "Lines of code, per repository"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/lines-repositories.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_lines: "yes"
+          plugin_lines_sections: repositories
+      - name: "Lines of code, history"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -652,8 +509,73 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_lines: "yes"
-          plugin_lines_sections: "repositories, history"
-      - name: gh-metrics / Achievements, detailed
+          plugin_lines_sections: history
+      - name: "Lines of code, every section"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/lines-all.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: repositories
+          plugin_lines: "yes"
+          plugin_lines_sections: "base, repositories, history"
+      # The action leaves its images in /metrics_renders/, owned by root.
+      - name: Collect
+        run: |
+          mkdir -p out
+          sudo cp -r /metrics_renders/gh-metrics out/
+          sudo chown -R "$(id -u):$(id -g)" out
+      - uses: actions/upload-artifact@v7
+        with:
+          name: metrics-2
+          path: out/
+
+  metrics-3:
+    runs-on: ubuntu-latest
+    # The METRICS token lives in this environment.
+    environment:
+      name: production
+    steps:
+      - name: "Classic, every plugin with data, two columns"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/classic-all-columns.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: "header, activity, community, repositories, metadata"
+          plugin_isocalendar: "yes"
+          plugin_isocalendar_duration: full-year
+          plugin_languages: "yes"
+          plugin_languages_limit: "8"
+          plugin_languages_details: "bytes-size, percentage"
+          plugin_lines: "yes"
+          plugin_achievements: "yes"
+          plugin_achievements_display: compact
+          plugin_activity: "yes"
+          plugin_activity_limit: "5"
+          plugin_activity_days: "0"
+          plugin_habits: "yes"
+          plugin_habits_facts: "yes"
+          plugin_habits_charts: "yes"
+          plugin_followup: "yes"
+          plugin_followup_sections: "repositories, user"
+          plugin_reactions: "yes"
+          plugin_reactions_details: percentage
+          plugin_repositories: "yes"
+          plugin_repositories_pinned: "6"
+          plugin_introduction: "yes"
+          plugin_people: "yes"
+          plugin_stars: "yes"
+          plugin_stars_limit: "4"
+          plugin_stargazers: "yes"
+          config_display: columns
+      - name: "Achievements, detailed"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -664,7 +586,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_achievements: "yes"
-      - name: gh-metrics / Achievements, compact, every rank
+      - name: "Achievements, compact"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -676,8 +598,32 @@ jobs:
           base: ""
           plugin_achievements: "yes"
           plugin_achievements_display: compact
+      - name: "Achievements, compact, every rank"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/achievements-compact-every-rank.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_achievements: "yes"
+          plugin_achievements_display: compact
           plugin_achievements_threshold: X
-      - name: gh-metrics / Recent activity
+      - name: "Achievements, detailed, without secret ones"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/achievements-no-secrets.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_achievements: "yes"
+          plugin_achievements_secrets: "no"
+      - name: "Activity"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -690,7 +636,35 @@ jobs:
           plugin_activity: "yes"
           plugin_activity_limit: "5"
           plugin_activity_days: "0"
-      - name: gh-metrics / Habits, facts
+      - name: "Activity, ten events with timestamps"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/activity-timestamps.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_activity: "yes"
+          plugin_activity_limit: "10"
+          plugin_activity_days: "0"
+          plugin_activity_timestamps: "yes"
+      - name: "Activity, pushes, pull requests, issues and releases"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/activity-code.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_activity: "yes"
+          plugin_activity_limit: "8"
+          plugin_activity_days: "0"
+          plugin_activity_filter: "push, pr, issue, release"
+      - name: "Habits, facts"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -703,7 +677,7 @@ jobs:
           plugin_habits: "yes"
           plugin_habits_facts: "yes"
           plugin_habits_charts: "no"
-      - name: gh-metrics / Habits, charts
+      - name: "Habits, charts"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -716,7 +690,35 @@ jobs:
           plugin_habits: "yes"
           plugin_habits_facts: "no"
           plugin_habits_charts: "yes"
-      - name: gh-metrics / Issues and pull requests on own repositories
+      - name: "Habits, graph charts"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/habits-charts-graph.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_habits: "yes"
+          plugin_habits_facts: "no"
+          plugin_habits_charts: "yes"
+          plugin_habits_charts_type: graph
+      - name: "Habits, facts and charts over 30 days"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/habits-all.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_habits: "yes"
+          plugin_habits_facts: "yes"
+          plugin_habits_charts: "yes"
+          plugin_habits_days: "30"
+      - name: "Issues and pull requests on own repositories"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -727,7 +729,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_followup: "yes"
-      - name: gh-metrics / Issues and pull requests opened by the user
+      - name: "Issues and pull requests opened by the user"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -739,31 +741,20 @@ jobs:
           base: ""
           plugin_followup: "yes"
           plugin_followup_sections: user
-      - name: gh-metrics / Notable contributions
+      - name: "Issues and pull requests, both sections, in depth"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
           user: RottenSea
-          filename: gh-metrics/notable.svg
+          filename: gh-metrics/followup-indepth.svg
           output_action: none
           config_timezone: Asia/Shanghai
           base: ""
-          plugin_notable: "yes"
-      - name: gh-metrics / Notable contributions, in depth
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/notable-indepth.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_notable: "yes"
-          plugin_notable_indepth: "yes"
-          plugin_notable_repositories: "yes"
-      - name: gh-metrics / Comment reactions
+          plugin_followup: "yes"
+          plugin_followup_sections: "repositories, user"
+          plugin_followup_indepth: "yes"
+      - name: "Reactions, with percentages"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -774,116 +765,21 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_reactions: "yes"
-          plugin_reactions_limit: "100"
           plugin_reactions_details: percentage
-      - name: gh-metrics / Pinned repositories
+      - name: "Reactions, relative, with counts and percentages"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
           user: RottenSea
-          filename: gh-metrics/repositories-pinned.svg
+          filename: gh-metrics/reactions-relative.svg
           output_action: none
           config_timezone: Asia/Shanghai
           base: ""
-          plugin_repositories: "yes"
-          plugin_repositories_pinned: "6"
-      - name: gh-metrics / Featured repositories
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/repositories-featured.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_repositories: "yes"
-          plugin_repositories_featured: "design-system, RottenSea.github.io"
-      - name: gh-metrics / Introduction
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/introduction.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: header
-          plugin_introduction: "yes"
-      - name: gh-metrics / Followers and following
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/people.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_people: "yes"
-          plugin_people_types: "followers, following"
-      - name: gh-metrics / Recently starred
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/stars.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_stars: "yes"
-          plugin_stars_limit: "4"
-      - name: gh-metrics / Starred topics, labels
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/topics.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_topics: "yes"
-          plugin_topics_limit: "12"
-      - name: gh-metrics / Starred topics, icons
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/topics-icons.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_topics: "yes"
-          plugin_topics_limit: "0"
-          plugin_topics_mode: icons
-      - name: gh-metrics / Stargazers, classic charts
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/stargazers.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_stargazers: "yes"
-      - name: gh-metrics / Stargazers, graph charts
-        uses: gh-metrics/metrics@master
-        continue-on-error: true
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: gh-metrics/stargazers-graph.svg
-          output_action: none
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_stargazers: "yes"
-          plugin_stargazers_charts_type: graph
-      - name: gh-metrics / Code snippet of the day
+          plugin_reactions: "yes"
+          plugin_reactions_display: relative
+          plugin_reactions_details: "count, percentage"
+      - name: "Code snippet of the day"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -896,18 +792,31 @@ jobs:
           plugin_code: "yes"
           plugin_code_languages: "typescript, javascript"
           plugin_code_load: "400"
-      - name: gh-metrics / Repository traffic
+      - name: "Notable contributions"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
           user: RottenSea
-          filename: gh-metrics/traffic.svg
+          filename: gh-metrics/notable.svg
           output_action: none
           config_timezone: Asia/Shanghai
           base: ""
-          plugin_traffic: "yes"
-      - name: gh-metrics / Discussions
+          plugin_notable: "yes"
+      - name: "Notable contributions, in depth"
+        uses: gh-metrics/metrics@master
+        continue-on-error: true
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: gh-metrics/notable-indepth.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_notable: "yes"
+          plugin_notable_indepth: "yes"
+          plugin_notable_repositories: "yes"
+      - name: "Discussions"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -918,7 +827,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_discussions: "yes"
-      - name: gh-metrics / Gists
+      - name: "Gists"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
@@ -929,46 +838,46 @@ jobs:
           config_timezone: Asia/Shanghai
           base: ""
           plugin_gists: "yes"
-      - name: gh-metrics / PageSpeed of www.rottenth.cafe
+      - name: "Starred topics, labels"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
           user: RottenSea
-          filename: gh-metrics/pagespeed.svg
+          filename: gh-metrics/topics.svg
           output_action: none
           config_timezone: Asia/Shanghai
           base: ""
-          plugin_pagespeed: "yes"
-          plugin_pagespeed_url: "https://www.rottenth.cafe"
-      - name: gh-metrics / PageSpeed of www.rottenth.cafe, detailed
+          plugin_topics: "yes"
+          plugin_topics_limit: "12"
+      - name: "Starred topics, icons"
         uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
           user: RottenSea
-          filename: gh-metrics/pagespeed-detailed.svg
+          filename: gh-metrics/topics-icons.svg
           output_action: none
           config_timezone: Asia/Shanghai
           base: ""
-          plugin_pagespeed: "yes"
-          plugin_pagespeed_detailed: "yes"
-          plugin_pagespeed_url: "https://www.rottenth.cafe"
+          plugin_topics: "yes"
+          plugin_topics_limit: "0"
+          plugin_topics_mode: icons
       # The action leaves its images in /metrics_renders/, owned by root.
-      - name: gh-metrics / collect
+      - name: Collect
         run: |
           mkdir -p out
           sudo cp -r /metrics_renders/gh-metrics out/
           sudo chown -R "$(id -u):$(id -g)" out
       - uses: actions/upload-artifact@v7
         with:
-          name: metrics
+          name: metrics-3
           path: out/
 
-  # The pages and both jobs' images, as the only commit on the showcase branch. It runs even when
+  # The page and every job's images, as the only commit on the showcase branch. It runs even when
   # a job above failed, so whatever was made still gets published.
   publish:
-    needs: [tools, metrics]
+    needs: [metrics-1, metrics-2, metrics-3]
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     steps:
