@@ -888,7 +888,8 @@ jobs:
           merge-multiple: true
       - name: Publish the showcase branch
         run: |
-          cp -r .github/showcase/pages/. out/
+          # The pages that described each image were removed from main; copy them if they come back.
+          if [ -d .github/showcase/pages ]; then cp -r .github/showcase/pages/. out/; fi
           ls -R out
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
