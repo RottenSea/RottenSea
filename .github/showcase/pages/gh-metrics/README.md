@@ -1,6 +1,6 @@
 # gh-metrics/metrics
 
-The maintained fork of lowlighter/metrics, through `gh-metrics/metrics@latest`. Every image also has `user: RottenSea`, `config_timezone: Asia/Shanghai` and, unless it sets its own, `base: ""`. The images have no background of their own and grey text, so they read on the dark theme as they are; the terminal template is dark in itself.
+The maintained fork of lowlighter/metrics, through `gh-metrics/metrics@master` (it has no release tags; `master` is its default branch). Every image also has `user: RottenSea`, `config_timezone: Asia/Shanghai` and, unless it sets its own, `base: ""`. The images have no background of their own and grey text, so they read on the dark theme as they are; the terminal template is dark in itself.
 
 ### Classic template, default sections
 

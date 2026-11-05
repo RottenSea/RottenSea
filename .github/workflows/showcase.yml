@@ -474,7 +474,7 @@ jobs:
       name: production
     steps:
       - name: gh-metrics / Classic template, default sections
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -484,7 +484,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: "header, activity, community, repositories, metadata"
       - name: gh-metrics / Classic template, header only
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -494,7 +494,7 @@ jobs:
           config_timezone: Asia/Shanghai
           base: header
       - name: gh-metrics / Terminal template
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -505,7 +505,7 @@ jobs:
           base: "header, activity, community, repositories, metadata"
           template: terminal
       - name: gh-metrics / Repository template, design-system
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -517,7 +517,7 @@ jobs:
           template: repository
           repo: design-system
       - name: gh-metrics / Isometric calendar, half year
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -528,7 +528,7 @@ jobs:
           base: ""
           plugin_isocalendar: "yes"
       - name: gh-metrics / Isometric calendar, full year
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -540,7 +540,7 @@ jobs:
           plugin_isocalendar: "yes"
           plugin_isocalendar_duration: full-year
       - name: gh-metrics / Calendar, current year
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -551,7 +551,7 @@ jobs:
           base: ""
           plugin_calendar: "yes"
       - name: gh-metrics / Calendar, full history
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -563,7 +563,7 @@ jobs:
           plugin_calendar: "yes"
           plugin_calendar_limit: "0"
       - name: gh-metrics / Languages, most used
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -575,7 +575,7 @@ jobs:
           plugin_languages: "yes"
           plugin_languages_limit: "8"
       - name: gh-metrics / Languages, with details
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -588,7 +588,7 @@ jobs:
           plugin_languages_limit: "8"
           plugin_languages_details: "bytes-size, percentage"
       - name: gh-metrics / Languages, recently used
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -602,7 +602,7 @@ jobs:
           plugin_languages_sections: recently-used
           plugin_languages_details: "bytes-size, percentage"
       - name: gh-metrics / Languages, most and recently used
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -616,7 +616,7 @@ jobs:
           plugin_languages_sections: "most-used, recently-used"
           plugin_languages_details: percentage
       - name: gh-metrics / Languages, in-depth analysis
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -631,7 +631,7 @@ jobs:
           plugin_languages_details: "lines, bytes-size"
           plugin_languages_analysis_timeout: "15"
       - name: gh-metrics / Lines of code, compact in the base section
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -642,7 +642,7 @@ jobs:
           base: repositories
           plugin_lines: "yes"
       - name: gh-metrics / Lines of code, repositories and history
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -654,7 +654,7 @@ jobs:
           plugin_lines: "yes"
           plugin_lines_sections: "repositories, history"
       - name: gh-metrics / Achievements, detailed
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -665,7 +665,7 @@ jobs:
           base: ""
           plugin_achievements: "yes"
       - name: gh-metrics / Achievements, compact, every rank
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -678,7 +678,7 @@ jobs:
           plugin_achievements_display: compact
           plugin_achievements_threshold: X
       - name: gh-metrics / Recent activity
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -691,7 +691,7 @@ jobs:
           plugin_activity_limit: "5"
           plugin_activity_days: "0"
       - name: gh-metrics / Habits, facts
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -704,7 +704,7 @@ jobs:
           plugin_habits_facts: "yes"
           plugin_habits_charts: "no"
       - name: gh-metrics / Habits, charts
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -717,7 +717,7 @@ jobs:
           plugin_habits_facts: "no"
           plugin_habits_charts: "yes"
       - name: gh-metrics / Issues and pull requests on own repositories
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -728,7 +728,7 @@ jobs:
           base: ""
           plugin_followup: "yes"
       - name: gh-metrics / Issues and pull requests opened by the user
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -740,7 +740,7 @@ jobs:
           plugin_followup: "yes"
           plugin_followup_sections: user
       - name: gh-metrics / Notable contributions
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -751,7 +751,7 @@ jobs:
           base: ""
           plugin_notable: "yes"
       - name: gh-metrics / Notable contributions, in depth
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -764,7 +764,7 @@ jobs:
           plugin_notable_indepth: "yes"
           plugin_notable_repositories: "yes"
       - name: gh-metrics / Comment reactions
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -777,7 +777,7 @@ jobs:
           plugin_reactions_limit: "100"
           plugin_reactions_details: percentage
       - name: gh-metrics / Pinned repositories
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -789,7 +789,7 @@ jobs:
           plugin_repositories: "yes"
           plugin_repositories_pinned: "6"
       - name: gh-metrics / Featured repositories
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -801,7 +801,7 @@ jobs:
           plugin_repositories: "yes"
           plugin_repositories_featured: "design-system, RottenSea.github.io"
       - name: gh-metrics / Introduction
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -812,7 +812,7 @@ jobs:
           base: header
           plugin_introduction: "yes"
       - name: gh-metrics / Followers and following
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -824,7 +824,7 @@ jobs:
           plugin_people: "yes"
           plugin_people_types: "followers, following"
       - name: gh-metrics / Recently starred
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -836,7 +836,7 @@ jobs:
           plugin_stars: "yes"
           plugin_stars_limit: "4"
       - name: gh-metrics / Starred topics, labels
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -848,7 +848,7 @@ jobs:
           plugin_topics: "yes"
           plugin_topics_limit: "12"
       - name: gh-metrics / Starred topics, icons
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -861,7 +861,7 @@ jobs:
           plugin_topics_limit: "0"
           plugin_topics_mode: icons
       - name: gh-metrics / Stargazers, classic charts
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -872,7 +872,7 @@ jobs:
           base: ""
           plugin_stargazers: "yes"
       - name: gh-metrics / Stargazers, graph charts
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -884,7 +884,7 @@ jobs:
           plugin_stargazers: "yes"
           plugin_stargazers_charts_type: graph
       - name: gh-metrics / Code snippet of the day
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -897,7 +897,7 @@ jobs:
           plugin_code_languages: "typescript, javascript"
           plugin_code_load: "400"
       - name: gh-metrics / Repository traffic
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -908,7 +908,7 @@ jobs:
           base: ""
           plugin_traffic: "yes"
       - name: gh-metrics / Discussions
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -919,7 +919,7 @@ jobs:
           base: ""
           plugin_discussions: "yes"
       - name: gh-metrics / Gists
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -930,7 +930,7 @@ jobs:
           base: ""
           plugin_gists: "yes"
       - name: gh-metrics / PageSpeed of www.rottenth.cafe
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
@@ -942,7 +942,7 @@ jobs:
           plugin_pagespeed: "yes"
           plugin_pagespeed_url: "https://www.rottenth.cafe"
       - name: gh-metrics / PageSpeed of www.rottenth.cafe, detailed
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@master
         continue-on-error: true
         with:
           token: ${{ secrets.METRICS }}
