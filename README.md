@@ -1,10 +1,8 @@
 <div align="center">
   <table>
     <tr>
-      <td rowspan="2" valign="top">
+      <td rowspan="3" valign="top">
         <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/classic.svg" alt="GitHub metrics" />
-        <br />
-        <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/stars.svg" alt="Recently starred repositories" />
       </td>
       <td valign="middle">
         <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/isocalendar.svg" alt="Contributions calendar" />
@@ -13,6 +11,11 @@
     <tr>
       <td valign="middle">
         <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/languages.svg" alt="Most used languages" />
+      </td>
+    </tr>
+    <tr>
+      <td valign="middle">
+        <img src="https://github.com/RottenSea/RottenSea/blob/cache/metrics/lines.svg" alt="Lines of code pushed" />
       </td>
     </tr>
   </table>

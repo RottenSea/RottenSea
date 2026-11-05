@@ -1,6 +1,6 @@
-# The profile README's images, one per block, committed to the cache branch every day. The README
-# lays them out in a table: the Classic image and recently starred on the left; the isometric
-# calendar and languages on the right, in two cells, each centred vertically.
+# The profile README's four images, rendered in one run and committed to the cache branch together
+# every day. The README lays them out in a table: the Classic image on the left; the isometric
+# calendar, languages and lines of code on the right, one cell each, centred vertically.
 name: Metrics
 
 on:
@@ -17,48 +17,22 @@ jobs:
     environment:
       name: production
     steps:
+      # Each render stays in /metrics_renders/ until the last step commits all four.
       - name: Classic
         uses: gh-metrics/metrics@master
         with:
           token: ${{ secrets.METRICS }}
           user: RottenSea
           filename: metrics/classic.svg
-          output_action: commit
-          committer_branch: cache
-          committer_message: "chore: update metrics"
+          output_action: none
           config_timezone: Asia/Shanghai
+          config_order: base.header, base.activity+community, base.repositories, stars
           base: header, activity, community, repositories
+          # Only the added and removed totals in the repositories section.
           plugin_lines: yes
-          plugin_lines_sections: base, repositories
-
-      - name: Recently starred
-        uses: gh-metrics/metrics@master
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: metrics/stars.svg
-          output_action: commit
-          committer_branch: cache
-          committer_message: "chore: update metrics"
-          config_timezone: Asia/Shanghai
-          base: ""
+          plugin_lines_sections: base
           plugin_stars: yes
           plugin_stars_limit: 3
-
-      - name: Languages
-        uses: gh-metrics/metrics@master
-        with:
-          token: ${{ secrets.METRICS }}
-          user: RottenSea
-          filename: metrics/languages.svg
-          output_action: commit
-          committer_branch: cache
-          committer_message: "chore: update metrics"
-          config_timezone: Asia/Shanghai
-          base: ""
-          plugin_languages: yes
-          plugin_languages_limit: 8
-          plugin_languages_details: bytes-size, percentage
 
       - name: Isometric calendar
         uses: gh-metrics/metrics@master
@@ -66,10 +40,51 @@ jobs:
           token: ${{ secrets.METRICS }}
           user: RottenSea
           filename: metrics/isocalendar.svg
-          output_action: commit
-          committer_branch: cache
-          committer_message: "chore: update metrics"
+          output_action: none
           config_timezone: Asia/Shanghai
           base: ""
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
+
+      - name: Languages
+        uses: gh-metrics/metrics@master
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: metrics/languages.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_languages: yes
+          plugin_languages_limit: 8
+          plugin_languages_details: bytes-size, percentage
+
+      - name: Lines of code
+        uses: gh-metrics/metrics@master
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: metrics/lines.svg
+          output_action: none
+          config_timezone: Asia/Shanghai
+          base: ""
+          plugin_lines: yes
+          plugin_lines_sections: repositories
+
+      - uses: actions/checkout@v7
+        with:
+          ref: cache
+
+      # The action leaves its images in /metrics_renders/, owned by root.
+      - name: Commit the images
+        run: |
+          mkdir -p metrics
+          sudo cp /metrics_renders/metrics/*.svg metrics/
+          sudo chown -R "$(id -u):$(id -g)" metrics
+          # Images earlier layouts used.
+          git rm --quiet --ignore-unmatch metrics/stars.svg metrics/profile.svg
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add metrics
+          git diff --cached --quiet || git commit --quiet -m "chore: update metrics"
+          git push origin cache
