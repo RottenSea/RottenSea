@@ -1,0 +1,480 @@
+# Generates dark versions of four profile stats tools, with most of their options, so the ones
+# worth keeping can be picked for the profile README. Run it by hand: it rebuilds the `showcase`
+# branch from nothing, one folder and one page per tool. Every image step may fail on its own
+# without stopping the others; a missing image shows up as a broken one on the page.
+name: Showcase
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  showcase:
+    runs-on: ubuntu-latest
+    # The METRICS token lives in this environment. It can read private repositories, so the
+    # stats include them where a tool supports it.
+    environment:
+      name: production
+    steps:
+      - uses: actions/checkout@v7
+
+      # ---------------------------------------------------------------------------------------
+      # cicirello/user-statistician: every dark theme, each section alone, and the other options
+      # ---------------------------------------------------------------------------------------
+      - name: user-statistician / theme dark
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/theme-dark.svg
+          colors: dark
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / theme dark-dimmed
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/theme-dark-dimmed.svg
+          colors: dark-dimmed
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / theme dark-high-contrast
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/theme-dark-high-contrast.svg
+          colors: dark-high-contrast
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / theme dark-colorblind
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/theme-dark-colorblind.svg
+          colors: dark-colorblind
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / theme dark-tritanopia
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/theme-dark-tritanopia.svg
+          colors: dark-tritanopia
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / theme halloween
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/theme-halloween.svg
+          colors: halloween
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / section general
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/section-general.svg
+          colors: dark
+          hide-keys: contributions, repositories, languages
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / section contributions
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/section-contributions.svg
+          colors: dark
+          hide-keys: general, repositories, languages
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / section repositories
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/section-repositories.svg
+          colors: dark
+          hide-keys: general, contributions, languages
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / section languages
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/section-languages.svg
+          colors: dark
+          hide-keys: general, contributions, repositories
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / animated language chart, every language
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/animated-languages.svg
+          colors: dark
+          animated-language-chart: true
+          max-languages: 100
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / no title, no border
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/no-title-no-border.svg
+          colors: dark
+          include-title: false
+          show-border: false
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / custom small title, featured repository
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/featured-small-title.svg
+          colors: dark
+          custom-title: GitHub Stats
+          small-title: true
+          featured-repository: design-system
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+      - name: user-statistician / Simplified Chinese
+        uses: cicirello/user-statistician@v1
+        continue-on-error: true
+        with:
+          image-file: out/user-statistician/locale-zh-hans.svg
+          colors: dark
+          locale: zh-Hans
+          commit-and-push: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+
+      # ---------------------------------------------------------------------------------------
+      # jstrieb/github-stats: its two images, with and without private repositories. It has no
+      # Action; the release binary runs on its own.
+      # ---------------------------------------------------------------------------------------
+      - name: github-stats / download
+        continue-on-error: true
+        run: |
+          curl --fail --location --output github-stats \
+            https://github.com/jstrieb/github-stats/releases/latest/download/github-stats_x86_64-linux
+          chmod +x github-stats
+          mkdir -p out/github-stats
+      - name: github-stats / with private repositories
+        continue-on-error: true
+        run: |
+          ./github-stats --silent \
+            --overview-output-file out/github-stats/overview.svg \
+            --languages-output-file out/github-stats/languages.svg
+        env:
+          ACCESS_TOKEN: ${{ secrets.METRICS }}
+          MAX_RETRIES: 10
+      - name: github-stats / public repositories only
+        continue-on-error: true
+        run: |
+          ./github-stats --silent --exclude-private \
+            --overview-output-file out/github-stats/overview-public.svg \
+            --languages-output-file out/github-stats/languages-public.svg
+        env:
+          ACCESS_TOKEN: ${{ secrets.METRICS }}
+          MAX_RETRIES: 10
+
+      # ---------------------------------------------------------------------------------------
+      # stats-organization/github-stats-extended, through its Action: the stats card's options,
+      # every top-languages layout, repository pins, and the stats card in dark themes
+      # ---------------------------------------------------------------------------------------
+      - name: github-stats-extended / stats
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=dark_github&show_icons=true
+          path: out/github-stats-extended/stats.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / stats, every extra stat
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=dark_github&show_icons=true&include_all_commits=true&contribs_include_own_repos=true&show=contributions,all_time_contribs,reviews,discussions_started,discussions_answered,prs_merged,prs_merged_percentage,prs_authored,prs_commented,prs_reviewed,issues_authored,issues_commented
+          path: out/github-stats-extended/stats-all.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / stats, GitHub rank icon
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=dark_github&show_icons=true&rank_icon=github
+          path: out/github-stats-extended/stats-rank-github.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / stats, percentile rank
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=dark_github&show_icons=true&rank_icon=percentile
+          path: out/github-stats-extended/stats-rank-percentile.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / stats, no rank
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=dark_github&show_icons=true&hide_rank=true
+          path: out/github-stats-extended/stats-no-rank.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / top languages, normal
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: top-langs
+          options: username=RottenSea&theme=dark_github&layout=normal&langs_count=8
+          path: out/github-stats-extended/langs-normal.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / top languages, normal in bytes
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: top-langs
+          options: username=RottenSea&theme=dark_github&layout=normal&langs_count=8&stats_format=bytes
+          path: out/github-stats-extended/langs-normal-bytes.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / top languages, compact
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: top-langs
+          options: username=RottenSea&theme=dark_github&layout=compact&langs_count=8
+          path: out/github-stats-extended/langs-compact.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / top languages, compact without bars
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: top-langs
+          options: username=RottenSea&theme=dark_github&hide_progress=true&langs_count=8
+          path: out/github-stats-extended/langs-no-progress.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / top languages, donut
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: top-langs
+          options: username=RottenSea&theme=dark_github&layout=donut&langs_count=8
+          path: out/github-stats-extended/langs-donut.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / top languages, vertical donut
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: top-langs
+          options: username=RottenSea&theme=dark_github&layout=donut-vertical&langs_count=8
+          path: out/github-stats-extended/langs-donut-vertical.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / top languages, pie
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: top-langs
+          options: username=RottenSea&theme=dark_github&layout=pie&langs_count=8
+          path: out/github-stats-extended/langs-pie.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / pin design-system
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: pin
+          options: username=RottenSea&repo=design-system&theme=dark_github
+          path: out/github-stats-extended/pin-design-system.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / pin RottenSea.github.io
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: pin
+          options: username=RottenSea&repo=RottenSea.github.io&theme=dark_github&show_owner=true
+          path: out/github-stats-extended/pin-rottensea-github-io.svg
+          token: ${{ secrets.METRICS }}
+      # The stats card in fifteen dark themes.
+      - name: github-stats-extended / theme dark
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=dark&show_icons=true
+          path: out/github-stats-extended/theme-dark.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme github_dark
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=github_dark&show_icons=true
+          path: out/github-stats-extended/theme-github_dark.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme github_dark_dimmed
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=github_dark_dimmed&show_icons=true
+          path: out/github-stats-extended/theme-github_dark_dimmed.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme tokyonight
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=tokyonight&show_icons=true
+          path: out/github-stats-extended/theme-tokyonight.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme dracula
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=dracula&show_icons=true
+          path: out/github-stats-extended/theme-dracula.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme radical
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=radical&show_icons=true
+          path: out/github-stats-extended/theme-radical.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme onedark
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=onedark&show_icons=true
+          path: out/github-stats-extended/theme-onedark.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme one_dark_pro
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=one_dark_pro&show_icons=true
+          path: out/github-stats-extended/theme-one_dark_pro.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme catppuccin_mocha
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=catppuccin_mocha&show_icons=true
+          path: out/github-stats-extended/theme-catppuccin_mocha.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme nord
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=nord&show_icons=true
+          path: out/github-stats-extended/theme-nord.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme gruvbox
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=gruvbox&show_icons=true
+          path: out/github-stats-extended/theme-gruvbox.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme rose_pine
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=rose_pine&show_icons=true
+          path: out/github-stats-extended/theme-rose_pine.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme nightowl
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=nightowl&show_icons=true
+          path: out/github-stats-extended/theme-nightowl.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme synthwave
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=synthwave&show_icons=true
+          path: out/github-stats-extended/theme-synthwave.svg
+          token: ${{ secrets.METRICS }}
+      - name: github-stats-extended / theme cobalt
+        uses: stats-organization/github-readme-stats-action@v2
+        continue-on-error: true
+        with:
+          card: stats
+          options: username=RottenSea&theme=cobalt&show_icons=true
+          path: out/github-stats-extended/theme-cobalt.svg
+          token: ${{ secrets.METRICS }}
+
+      # ---------------------------------------------------------------------------------------
+      # yoshi389111/github-profile-3d-contrib: its three night images, then dark versions of the
+      # others from .github/showcase/3d-contrib.json. It always writes to ./profile-3d-contrib/.
+      # ---------------------------------------------------------------------------------------
+      - name: 3d-contrib / built-in images
+        uses: yoshi389111/github-profile-3d-contrib@latest
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+          USERNAME: RottenSea
+      - name: 3d-contrib / keep the night images
+        continue-on-error: true
+        run: |
+          mkdir -p out/3d-contrib
+          for name in night-view night-green night-rainbow; do
+            mv "profile-3d-contrib/profile-$name.svg" out/3d-contrib/
+          done
+          rm -rf profile-3d-contrib
+      - name: 3d-contrib / dark versions of the other styles
+        uses: yoshi389111/github-profile-3d-contrib@latest
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.METRICS }}
+          USERNAME: RottenSea
+          SETTING_JSON: .github/showcase/3d-contrib.json
+      - name: 3d-contrib / collect
+        continue-on-error: true
+        run: |
+          mv profile-3d-contrib/*.svg out/3d-contrib/
+          rm -rf profile-3d-contrib
+
+      # ---------------------------------------------------------------------------------------
+      # The pages, then the whole of out/ as the only commit on the showcase branch
+      # ---------------------------------------------------------------------------------------
+      - name: Publish the showcase branch
+        run: |
+          cp -r .github/showcase/pages/. out/
+          ls -R out
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan showcase
+          git rm -rf --quiet .
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name out -exec rm -rf {} +
+          mv out/* .
+          rmdir out
+          git add -A
+          git commit --quiet -m "chore: generate the showcase"
+          git push --force origin showcase
