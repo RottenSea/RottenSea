@@ -1,5 +1,6 @@
-# The profile README's image: one gh-metrics Classic image laid out in two columns with a CSS grid,
-# committed to the cache branch every day.
+# The profile README's images, one per block, committed to the cache branch every day. The README
+# lays them out in a table: the Classic image on the left, recently starred and languages on the
+# right, and the isometric calendar across the bottom.
 name: Metrics
 
 on:
@@ -16,50 +17,59 @@ jobs:
     environment:
       name: production
     steps:
-      - uses: gh-metrics/metrics@master
+      - name: Classic
+        uses: gh-metrics/metrics@master
         with:
           token: ${{ secrets.METRICS }}
           user: RottenSea
-          filename: metrics/profile.svg
+          filename: metrics/classic.svg
           output_action: commit
           committer_branch: cache
           committer_message: "chore: update metrics"
           config_timezone: Asia/Shanghai
-          # 960 wide, so the two columns fit side by side.
-          config_display: large
-          # The grid below places the sections by their position, so this order matters.
-          config_order: base.header, base.activity+community, base.repositories, lines, stars, languages, isocalendar
           base: header, activity, community, repositories
           plugin_lines: yes
           plugin_lines_sections: base, repositories, history
+
+      - name: Recently starred
+        uses: gh-metrics/metrics@master
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: metrics/stars.svg
+          output_action: commit
+          committer_branch: cache
+          committer_message: "chore: update metrics"
+          config_timezone: Asia/Shanghai
+          base: ""
           plugin_stars: yes
           plugin_stars_limit: 4
+
+      - name: Languages
+        uses: gh-metrics/metrics@master
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: metrics/languages.svg
+          output_action: commit
+          committer_branch: cache
+          committer_message: "chore: update metrics"
+          config_timezone: Asia/Shanghai
+          base: ""
           plugin_languages: yes
           plugin_languages_limit: 8
           plugin_languages_details: bytes-size, percentage
+
+      - name: Isometric calendar
+        uses: gh-metrics/metrics@master
+        with:
+          token: ${{ secrets.METRICS }}
+          user: RottenSea
+          filename: metrics/isocalendar.svg
+          output_action: commit
+          committer_branch: cache
+          committer_message: "chore: update metrics"
+          config_timezone: Asia/Shanghai
+          base: ""
           plugin_isocalendar: yes
           plugin_isocalendar_duration: full-year
-          # Left column: header, activity and community, repositories, lines of code. Right column:
-          # recently starred, then languages. The calendar spans both columns at the bottom.
-          extras_css: |
-            svg.large .items-wrapper {
-              display: grid;
-              grid-template-columns: 480px 460px;
-              column-gap: 20px;
-              align-items: start;
-              grid-template-areas:
-                "header stars"
-                "activity stars"
-                "repositories languages"
-                "lines languages"
-                "calendar calendar";
-            }
-            .items-wrapper > :nth-child(1) { grid-area: header; }
-            .items-wrapper > :nth-child(2) { grid-area: activity; }
-            .items-wrapper > :nth-child(3) { grid-area: repositories; }
-            .items-wrapper > :nth-child(4) { grid-area: lines; }
-            .items-wrapper > :nth-child(5) { grid-area: stars; }
-            .items-wrapper > :nth-child(6) { grid-area: languages; }
-            .items-wrapper > :nth-child(7) { grid-area: calendar; }
-            /* Large display puts two starred repositories on a row; the column is too narrow. */
-            svg.large .items-wrapper .largeable-width-half { width: 100%; }
